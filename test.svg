@@ -13,3 +13,5 @@
     ]]>
   </script>
   </svg>
+
+<svg/onload=alert(1)><svg>
