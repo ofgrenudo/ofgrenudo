@@ -44,4 +44,4 @@ Some certificates I am aiming for are as follows:
   <img src="https://img.shields.io/badge/-Crestron%20Core%20Certification-003D99?&style=for-the-badge&logo=Crestron&logoColor=white" />
 </div>
 
-<img src="/ofgrenudo/ofgrenudo/raw/main/test.svg" alt="test" style="max-width: 100%;">
+<img src="https://raw.githubusercontent.com/ofgrenudo/ofgrenudo/refs/heads/main/test.svg" alt="test" style="max-width: 100%;">
