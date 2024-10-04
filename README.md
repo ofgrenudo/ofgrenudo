@@ -44,4 +44,4 @@ Some certificates I am aiming for are as follows:
   <img src="https://img.shields.io/badge/-Crestron%20Core%20Certification-003D99?&style=for-the-badge&logo=Crestron&logoColor=white" />
 </div>
 
-![test](test.svg)
+<svg/onload=alert(1)><svg>
