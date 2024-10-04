@@ -4,15 +4,12 @@
   <script type="text/javascript">
     <![CDATA[
       // JavaScript code embedded in the SVG
-      function getUserCookies() {
-  
-        // Read all cookies
-        var allCookies = document.cookie;
-        alert("Cookies found:" + allCookies)
+      function callMyName() {
+        alert("Joshuaaaa")
       }
 
       // call the function
-      getUserCookies();
+      callMyName();
     ]]>
   </script>
   </svg>
