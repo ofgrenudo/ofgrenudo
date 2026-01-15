@@ -1,16 +1,29 @@
-## Hi there 👋
+# Hello World!!
 
-<!--
-**ofgrenudo/ofgrenudo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+hello my name is Joshua! Professionally I am a systems analyst / developer at [Kalamazoo Valley Community College](https://kvcc.edu).
+I deal with a number of programming languages, and build / deliver solutions for end users across the company with a focus on portable and secure systems and programs using a combination of dockerization and system hardening.
 
-Here are some ideas to get you started:
+I currently am attending Western Michigan University, and am senior expected to graduate in April of 2026 with a Bachelor of Buisness in Computer Information Systems!
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Fun facts about me
+
+- I can pick locks
+- I have a dog
+- I love all things horror
+
+### Technical Skills
+
+#### Languages
+
+- English / Spanish
+- Go, Python, Rust, Javascript, PHP
+
+#### Databases + Tools
+
+- Oracle, Postgres, MySQL, MSSQL, Docker, Nagios, Airflow
+
+#### Certifications
+
+- AWS Certified Cloud Practicioner
+- AWS Solution Architect Associate
+- Crestron Certified Technician
