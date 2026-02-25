@@ -1,1 +1,1 @@
-from .ofgrenudo import *
+from .cli import *
