@@ -14,7 +14,10 @@ I currently am attending [Western Michigan University](https://wmich.edu/), and 
 ### Getting Ahold of Me
 
 ```bash
-soon to be pipx run ofgrenudo
+# Install me as a binary
+pipx install ofgrenudo
+# Then run ofgrenudo
+ofgrenudo
 ```
 
 ### Technical Skills
