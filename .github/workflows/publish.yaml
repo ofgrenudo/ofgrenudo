@@ -1,0 +1,72 @@
+name: Build & Publish to PyPI
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write # REQUIRED for PyPI Trusted Publishing (OIDC)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Determine current version (pyproject.toml)
+        id: ver
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import tomllib
+          with open("pyproject.toml","rb") as f:
+              data = tomllib.load(f)
+          v = data["project"]["version"]
+          print(f"version={v}")
+          PY
+
+      - name: Detect if this version is already tagged
+        id: tagged
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.ver.outputs.version }}"
+          if git tag -l "v${VERSION}" | grep -q "^v${VERSION}$"; then
+            echo "already_tagged=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_tagged=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build distributions
+        if: steps.tagged.outputs.already_tagged == 'false'
+        run: |
+          uv build
+
+      # Publish using PyPI Trusted Publishing (OIDC)
+      - name: Publish to PyPI
+        if: steps.tagged.outputs.already_tagged == 'false'
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      # Optional: tag the repo after successful publish (recommended)
+      - name: Create git tag vX.Y.Z
+        if: steps.tagged.outputs.already_tagged == 'false'
+        permissions:
+          contents: write
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.ver.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"

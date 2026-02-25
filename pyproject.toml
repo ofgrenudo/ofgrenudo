@@ -1,0 +1,23 @@
+[project]
+name = "ofgrenudo"
+version = "0.0.1"
+authors = [
+  { name="Joshua Winters-Brown", email="ofgrenudo@github.com" },
+]
+description = "A python package for getting to know more about me."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/ofgrenudo/ofgrenudo"
+Issues = "https://github.com/ofgrenudo/ofgrenudo/issues"
+
+[build-system]
+requires = ["uv_build>=0.10.5,<0.11.0"]
+build-backend = "uv_build"
