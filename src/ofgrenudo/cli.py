@@ -6,6 +6,7 @@ import sys
 
 DISCORD_HANDLE = "ofgrenudo"
 GITHUB_URL = "https://github.com/ofgrenudo"
+WEBSITE = "https://unorthodoxdev.net"
 
 
 def _version() -> str:
@@ -43,7 +44,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if cmd == "links":
         print(f"GitHub: {GITHUB_URL}")
-        print("Website: https://unorthodoxdev.net/")
+        print(f"Website: {WEBSITE}")
         return 0
 
     # default: about
