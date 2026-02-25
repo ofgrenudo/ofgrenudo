@@ -1,7 +1,7 @@
 import datetime
 
 
-def main():
+def main() -> None:
     print("Hello World")
     print(f"Today is {datetime.date.today()}")
     print("You can reach me @grenudo on Discord")
