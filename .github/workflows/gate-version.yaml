@@ -1,0 +1,75 @@
+name: Version must increase
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  version-gate:
+    name: Version must increase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR HEAD
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install version tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install packaging
+
+      - name: Compare pyproject.toml version against main
+        env:
+          BASE_REF: origin/main
+        run: |
+          python - <<'PY'
+          import subprocess, sys, os
+          from packaging.version import Version
+
+          def read_version_from_pyproject(path: str) -> Version:
+              import tomllib
+              with open(path, "rb") as f:
+                  data = tomllib.load(f)
+              try:
+                  v = data["project"]["version"]
+              except Exception:
+                  raise SystemExit("ERROR: pyproject.toml missing [project].version")
+              return Version(v)
+
+          # Ensure we have the base branch
+          subprocess.run(["git", "fetch", "origin", "main:origin/main"], check=True)
+
+          # Read PR version (current workspace)
+          pr_ver = read_version_from_pyproject("pyproject.toml")
+
+          # Read main version by checking out the file from origin/main without switching branches
+          main_blob = subprocess.check_output(["git", "show", "origin/main:pyproject.toml"], text=True)
+
+          import tomllib
+          main_data = tomllib.loads(main_blob)
+          try:
+              main_ver = Version(main_data["project"]["version"])
+          except Exception:
+              raise SystemExit("ERROR: origin/main pyproject.toml missing [project].version")
+
+          print(f"PR version:   {pr_ver}")
+          print(f"Main version: {main_ver}")
+
+          if pr_ver <= main_ver:
+              raise SystemExit(
+                  f"ERROR: Version must increase for merge. "
+                  f"PR version ({pr_ver}) is not greater than main ({main_ver})."
+              )
+
+          print("OK: Version increased.")
+          PY
