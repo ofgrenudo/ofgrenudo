@@ -1,6 +1,6 @@
 [project]
 name = "ofgrenudo"
-version = "0.0.3"
+version = "0.0.4"
 authors = [
   { name="Joshua Winters-Brown", email="ofgrenudo@github.com" },
 ]
@@ -17,6 +17,9 @@ license-files = ["LICEN[CS]E*"]
 [project.urls]
 Homepage = "https://github.com/ofgrenudo/ofgrenudo"
 Issues = "https://github.com/ofgrenudo/ofgrenudo/issues"
+
+[project.scripts]
+ofgrenudo = "ofgrenudo.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.10.5,<0.11.0"]
