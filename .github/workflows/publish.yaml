@@ -6,11 +6,13 @@ on:
 
 permissions:
   contents: read
-  id-token: write # REQUIRED for PyPI Trusted Publishing (OIDC)
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed to push tags
+      id-token: write # needed for PyPI Trusted Publishing (OIDC)
 
     steps:
       - name: Checkout
@@ -53,16 +55,14 @@ jobs:
         run: |
           uv build
 
-      # Publish using PyPI Trusted Publishing (OIDC)
       - name: Publish to PyPI
         if: steps.tagged.outputs.already_tagged == 'false'
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
 
-      # Optional: tag the repo after successful publish (recommended)
       - name: Create git tag vX.Y.Z
         if: steps.tagged.outputs.already_tagged == 'false'
-        permissions:
-          contents: write
         run: |
           set -euo pipefail
           VERSION="${{ steps.ver.outputs.version }}"
