@@ -1,55 +1,42 @@
+from importlib.metadata import version as get_version
+
 import typer
 
-from ofgrenudo.bashrc import config_bashrc, reset_bashrc, save_bashrc
-from ofgrenudo.config import DISCORD, WEBSITE
-from ofgrenudo.discord import display_discord
-from ofgrenudo.network import get_lan_ip, get_wan_ip
-from ofgrenudo.website import display_website, open_website
+from ofgrenudo.commands.bashrc import cli as bashrc_cli
+from ofgrenudo.commands.my import cli as my_cli
+from ofgrenudo.commands.network import cli as network_cli
 
-__ALL__ = [DISCORD, WEBSITE, "display_discord", "display_website", "hello", "main"]
-
-cli = typer.Typer()
+cli = typer.Typer(no_args_is_help=True)
+__version__ = get_version("ofgrenudo")
 
 
-@cli.command()
-def my_discord():
-    display_discord()
+def _version_cb(value: bool) -> None:
+    if value:
+        typer.echo(f"ofgrenudo v{__version__}")
+        raise typer.Exit()
 
 
-@cli.command()
-def my_website():
-    display_website()
+@cli.callback()
+def version(
+    version: bool = typer.Option(
+        False,
+        "--version",
+        help="Display the version and exit",
+        callback=_version_cb,
+        is_eager=True,
+    ),
+) -> None:
+    pass
 
 
-@cli.command()
-def lanip():
-    get_lan_ip()
-
-
-@cli.command()
-def wanip():
-    get_wan_ip()
-
-
-@cli.command()
-def bashrc_save(home_directory: str = "/home/jwintersbro"):
-    save_bashrc(home_directory)
-
-
-@cli.command()
-def bashrc_restore(home_directory: str = "/home/jwintersbro"):
-    reset_bashrc(home_directory)
-
-
-@cli.command()
-def bashrc_install(home_directory: str = "/home/jwintersbro"):
-    config_bashrc(home_directory)
-
-
-@cli.command()
-def launch_my_website():
-    open_website()
+cli.add_typer(network_cli, name="network")
+cli.add_typer(my_cli, name="my")
+cli.add_typer(bashrc_cli, name="bashrc")
 
 
 def main() -> None:
     cli()
+
+
+if __name__ == "__main__":
+    main()

@@ -17,14 +17,11 @@ _all_aliases = [LS_ALIAS, COMMANDS_ALIAS]
 
 
 def _expand(path: str) -> str:
-    # Expand environment variables first
     path = os.path.expandvars(path)
 
-    # If it's not using "~", we're done.
     if not path.startswith("~"):
         return str(Path(path))
 
-    # Try normal expanduser
     try:
         return str(Path(path).expanduser())
     except RuntimeError:
@@ -36,8 +33,7 @@ def _expand(path: str) -> str:
             if path.startswith("~/"):
                 return os.path.join(home, path[2:])
         raise RuntimeError(
-            "Could not determine home directory. "
-            "Set the HOME environment variable or pass an absolute path."
+            "Could not determine home directory. Set the HOME environment variable or pass an absolute path."
         )
 
 
