@@ -15,7 +15,7 @@ I currently am attending [Western Michigan University](https://wmich.edu/), and 
 
 ```bash
 # Install me as a binary
-pipx install ofgrenudo
+uvx ofgrenudo
 # Then run ofgrenudo
 ofgrenudo
 ```
