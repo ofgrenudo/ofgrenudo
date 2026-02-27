@@ -17,8 +17,7 @@ ofgrenudo = "ofgrenudo:main"
 requires = ["uv_build>=0.10.4,<0.11.0"]
 build-backend = "uv_build"
 
-[tool.uv.tasks]
-build = [
-    "pytest",
-    "ruff check . --fix"
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
 ]
