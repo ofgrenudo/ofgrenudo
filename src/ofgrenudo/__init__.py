@@ -1,5 +1,3 @@
-from typing import Annotated
-
 import typer
 
 from ofgrenudo.bashrc import config_bashrc, reset_bashrc, save_bashrc
