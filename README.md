@@ -3,8 +3,6 @@
 hello my name is Joshua! Professionally I am a systems analyst / developer at [Kalamazoo Valley Community College](https://kvcc.edu).
 I deal with a number of programming languages, and build / deliver solutions for end users across the company with a focus on portable and secure systems and programs using a combination of dockerization and system hardening.
 
-I currently am attending [Western Michigan University](https://wmich.edu/), and am senior expected to graduate in April of 2026 with a [Bachelor of Buisness in Computer Information Systems](https://catalog.wmich.edu/preview_program.php?catoid=47&poid=15532&returnto=2271)!
-
 ### Fun facts about me
 
 - Im pretty good at picking locks
